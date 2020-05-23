@@ -1,5 +1,6 @@
 package br.com.api.movies.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,10 @@ public class Season implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date airDate;
     private Integer seasonNumber;
 
