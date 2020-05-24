@@ -48,6 +48,6 @@ public class PersonService {
     public Person findById(Long id) {
         log.info("Buscando ator pelo id.");
         Optional<Person> person = this.personRepository.findById(id);
-        return person.orElseThrow(() -> new ObjectNotFoundException("Person is null: " + Person.class.getName()));
+        return person.orElseThrow(() -> new ObjectNotFoundException("Não existe pessoa com o Id: " + id));
     }
 }

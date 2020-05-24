@@ -1,6 +1,5 @@
 package br.com.api.movies.services;
 
-import br.com.api.movies.entities.Media;
 import br.com.api.movies.entities.Season;
 import br.com.api.movies.repositories.MediaRepository;
 import br.com.api.movies.repositories.SeasonRepository;
@@ -32,7 +31,7 @@ public class SeasonService {
         this.mediaRepository.findById(mediaId).map(media -> {
             season.setMedia(media);
             return this.seasonRepository.save(season);
-        }).orElseThrow(() -> new ObjectNotFoundException("Media is null: " + Media.class.getName()));
+        }).orElseThrow(() -> new ObjectNotFoundException("Não existe mídia com o Id: " + mediaId));
     }
 
     /**
@@ -55,6 +54,6 @@ public class SeasonService {
     public Season findById(Long id) {
         log.info("Buscando informações de uma temporada pelo Id");
         Optional<Season> season = this.seasonRepository.findById(id);
-        return season.orElseThrow(() -> new ObjectNotFoundException("Season is null: " + Season.class.getName()));
+        return season.orElseThrow(() -> new ObjectNotFoundException("Não existe temporada com o Id: " + id));
     }
 }

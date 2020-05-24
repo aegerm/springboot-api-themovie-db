@@ -38,6 +38,6 @@ public class CreditService {
     public Credit findById(Long id) {
         log.info("Buscando crédito pelo id.");
         Optional<Credit> credit = this.creditRepository.findById(id);
-        return credit.orElseThrow(() -> new ObjectNotFoundException("Credit is null " + Credit.class.getName()));
+        return credit.orElseThrow(() -> new ObjectNotFoundException("Não existem créditos com o Id: " + id));
     }
 }

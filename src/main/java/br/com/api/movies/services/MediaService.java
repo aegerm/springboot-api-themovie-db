@@ -48,6 +48,6 @@ public class MediaService {
     public Media findById(Long id) {
         log.info("Buscando mídia pelo Id.");
         Optional<Media> media = this.mediaRepository.findById(id);
-        return media.orElseThrow(() -> new ObjectNotFoundException("Media is null: " + Media.class.getName()));
+        return media.orElseThrow(() -> new ObjectNotFoundException("Não existem mídia com o Id:  " + id));
     }
 }
