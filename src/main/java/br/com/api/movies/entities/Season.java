@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
 @Entity
@@ -23,7 +22,7 @@ public class Season implements Serializable {
     private Long id;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date airDate;
+    private String airDate;
     private Integer seasonNumber;
 
     @JsonIgnore

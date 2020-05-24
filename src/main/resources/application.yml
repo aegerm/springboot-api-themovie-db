@@ -4,4 +4,4 @@ spring:
 
 jwt:
   secret: BarenMetalSecretToken
-  expiration: 60000
+  expiration: 600000

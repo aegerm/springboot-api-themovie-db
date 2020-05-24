@@ -1,0 +1,63 @@
+package br.com.api.movies.repositories;
+
+import br.com.api.movies.entities.Person;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+@SpringBootTest
+public class PersonRepositoryTest {
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    /**
+     * setValues
+     *
+     */
+    @BeforeEach
+    public void setValues() {
+        Person person = new Person();
+        person.setId(1L);
+        person.setName("Bryan Cranston");
+        this.personRepository.save(person);
+    }
+
+    /**
+     * savePersonTest
+     *
+     */
+    @Test
+    public void savePersonTest() {
+        Person person = new Person();
+        person.setName("Bryan Cranston");
+        this.personRepository.save(person);
+
+        Assertions.assertThat(person.getId()).isNotNull();
+        Assertions.assertThat(person.getName()).isEqualTo("Bryan Cranston");
+    }
+
+    /**
+     * listAllPersons
+     *
+     */
+    @Test
+    public void listAllPersons() {
+        List<Person> personList = this.personRepository.findAll();
+        Assertions.assertThat(personList.size()).isEqualTo(1);
+    }
+
+    /**
+     * listPersonById
+     *
+     */
+    @Test
+    public void listPersonById() {
+        Person person = this.personRepository.findById(1L).get();
+        Assertions.assertThat(person.getId()).isEqualTo(1L);
+    }
+}
