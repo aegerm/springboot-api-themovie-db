@@ -1,15 +1,18 @@
 package br.com.api.movies.repositories;
 
+import br.com.api.movies.MoviesApplication;
 import br.com.api.movies.entities.Person;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = MoviesApplication.class)
+@ActiveProfiles("dev")
 public class PersonRepositoryTest {
 
     @Autowired
