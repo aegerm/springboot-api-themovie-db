@@ -1,5 +1,6 @@
 package br.com.api.movies.services;
 
+import br.com.api.movies.dto.SeasonDTO;
 import br.com.api.movies.entities.Season;
 import br.com.api.movies.repositories.MediaRepository;
 import br.com.api.movies.repositories.SeasonRepository;
@@ -55,5 +56,18 @@ public class SeasonService {
         log.info("Buscando informações de uma temporada pelo Id");
         Optional<Season> season = this.seasonRepository.findById(id);
         return season.orElseThrow(() -> new ObjectNotFoundException("Não existe temporada com o Id: " + id));
+    }
+
+    /**
+     * fromDTO
+     *
+     * @param dto
+     * @return
+     */
+    public Season fromDTO(SeasonDTO dto) {
+        Season season = new Season();
+        season.setSeasonNumber(dto.getSeasonNumber());
+        season.setAirDate(dto.getAirDate());
+        return season;
     }
 }

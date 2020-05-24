@@ -1,5 +1,6 @@
 package br.com.api.movies.resources;
 
+import br.com.api.movies.dto.CreditDTO;
 import br.com.api.movies.entities.Credit;
 import br.com.api.movies.services.CreditService;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/credits")
@@ -29,9 +31,10 @@ public class CreditResource {
      */
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
-    public ResponseEntity<List<Credit>> findCredits() {
+    public ResponseEntity<List<CreditDTO>> findCredits() {
         List<Credit> credits = this.creditService.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(credits);
+        List<CreditDTO> creditDTOS = credits.stream().map(value -> new CreditDTO(value)).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(creditDTOS);
     }
 
     /**

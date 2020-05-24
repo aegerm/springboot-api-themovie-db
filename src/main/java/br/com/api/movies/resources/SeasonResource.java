@@ -1,5 +1,6 @@
 package br.com.api.movies.resources;
 
+import br.com.api.movies.dto.SeasonDTO;
 import br.com.api.movies.entities.Season;
 import br.com.api.movies.services.SeasonService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/seasons")
@@ -23,9 +25,10 @@ public class SeasonResource {
      * @return
      */
     @GetMapping
-    public ResponseEntity<List<Season>> findSeasons() {
+    public ResponseEntity<List<SeasonDTO>> findSeasons() {
         List<Season> seasons = this.seasonService.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(seasons);
+        List<SeasonDTO> seasonDTOS = seasons.stream().map(value -> new SeasonDTO(value)).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(seasonDTOS);
     }
 
     /**
@@ -44,11 +47,12 @@ public class SeasonResource {
      * saveSeason
      *
      * @param mediaId
-     * @param season
+     * @param dto
      * @return
      */
-    @PostMapping(value = "/medias/{id}")
-    public ResponseEntity<Void> saveSeason(@PathVariable Long mediaId, @RequestBody Season season) {
+    @PostMapping(value = "/medias/{mediaId}")
+    public ResponseEntity<Void> saveSeason(@PathVariable Long mediaId, @RequestBody SeasonDTO dto) {
+        Season season = this.seasonService.fromDTO(dto);
         this.seasonService.saveSeason(mediaId, season);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

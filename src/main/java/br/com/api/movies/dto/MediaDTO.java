@@ -4,9 +4,13 @@ import br.com.api.movies.entities.Media;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-public class MediaDTO {
+public class MediaDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String name;
