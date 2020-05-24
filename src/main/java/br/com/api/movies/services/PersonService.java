@@ -1,5 +1,6 @@
 package br.com.api.movies.services;
 
+import br.com.api.movies.dto.PersonDTO;
 import br.com.api.movies.entities.Person;
 import br.com.api.movies.repositories.PersonRepository;
 import br.com.api.movies.services.exceptions.ObjectNotFoundException;
@@ -49,5 +50,18 @@ public class PersonService {
         log.info("Buscando ator pelo id.");
         Optional<Person> person = this.personRepository.findById(id);
         return person.orElseThrow(() -> new ObjectNotFoundException("Não existe pessoa com o Id: " + id));
+    }
+
+    /**
+     * fromDTO
+     *
+     * @param personDTO
+     * @return
+     */
+    public Person fromDTO(PersonDTO personDTO) {
+        Person person = new Person();
+        person.setId(personDTO.getId());
+        person.setName(personDTO.getName());
+        return person;
     }
 }

@@ -1,5 +1,6 @@
 package br.com.api.movies.resources;
 
+import br.com.api.movies.dto.PersonDTO;
 import br.com.api.movies.entities.Person;
 import br.com.api.movies.services.PersonService;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/persons")
@@ -27,9 +29,10 @@ public class PersonResource {
      */
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
-    public ResponseEntity<List<Person>> findPersons() {
+    public ResponseEntity<List<PersonDTO>> findPersons() {
         List<Person> personList = this.personService.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(personList);
+        List<PersonDTO> personDTOList = personList.stream().map(value -> new PersonDTO(value)).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(personDTOList);
     }
 
     /**
@@ -48,13 +51,14 @@ public class PersonResource {
     /**
      * savePerson
      *
-     * @param person
+     * @param dto
      * @return
      */
     @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<Void> savePerson(@RequestBody Person person) {
+    public ResponseEntity<Void> savePerson(@RequestBody PersonDTO dto) {
+        Person person = this.personService.fromDTO(dto);
         this.personService.savePerson(person);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

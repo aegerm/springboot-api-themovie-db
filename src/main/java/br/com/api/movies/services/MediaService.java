@@ -1,5 +1,6 @@
 package br.com.api.movies.services;
 
+import br.com.api.movies.dto.MediaDTO;
 import br.com.api.movies.entities.Media;
 import br.com.api.movies.repositories.MediaRepository;
 import br.com.api.movies.services.exceptions.ObjectNotFoundException;
@@ -49,5 +50,20 @@ public class MediaService {
         log.info("Buscando mídia pelo Id.");
         Optional<Media> media = this.mediaRepository.findById(id);
         return media.orElseThrow(() -> new ObjectNotFoundException("Não existem mídia com o Id:  " + id));
+    }
+
+    /**
+     * fromDTO
+     *
+     * @param mediaDTO
+     * @return
+     */
+    public Media fromDTO(MediaDTO mediaDTO) {
+        Media media = new Media();
+        media.setId(mediaDTO.getId());
+        media.setName(mediaDTO.getName());
+        media.setOriginalName(mediaDTO.getOriginalName());
+        media.setCharacter(mediaDTO.getCharacter());
+        return media;
     }
 }
