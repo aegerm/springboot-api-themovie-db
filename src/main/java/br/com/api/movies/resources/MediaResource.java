@@ -2,6 +2,8 @@ package br.com.api.movies.resources;
 
 import br.com.api.movies.entities.Media;
 import br.com.api.movies.services.MediaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,7 @@ public class MediaResource {
      *
      * @return
      */
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
     public ResponseEntity<List<Media>> findMedias() {
         List<Media> medias = this.mediaService.findAll();
@@ -35,6 +38,7 @@ public class MediaResource {
      * @param id
      * @return
      */
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping(value = "/{id}")
     public ResponseEntity<Media> findMediaById(@PathVariable Long id) {
         Media media = this.mediaService.findById(id);
@@ -47,6 +51,7 @@ public class MediaResource {
      * @param media
      * @return
      */
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Void> saveMedia(@RequestBody Media media) {

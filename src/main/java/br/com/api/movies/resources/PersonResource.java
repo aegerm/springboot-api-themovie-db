@@ -2,6 +2,8 @@ package br.com.api.movies.resources;
 
 import br.com.api.movies.entities.Person;
 import br.com.api.movies.services.PersonService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,7 @@ public class PersonResource {
      *
      * @return
      */
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
     public ResponseEntity<List<Person>> findPersons() {
         List<Person> personList = this.personService.findAll();
@@ -35,6 +38,7 @@ public class PersonResource {
      * @param id
      * @return
      */
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping(value = "/{id}")
     public ResponseEntity<Person> findPersonById(@PathVariable Long id) {
         Person person = this.personService.findById(id);
@@ -47,6 +51,7 @@ public class PersonResource {
      * @param person
      * @return
      */
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Void> savePerson(@RequestBody Person person) {

@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -36,13 +37,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final JwtUtilSecurity jwtUtilSecurity;
 
     private static final String[] PUBLIC_MATCHERS = {
-        "/h2/**",
+        "/h2/**"
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
         "/medias/",
         "/persons/",
     };
+
+    /**
+     * configure
+     *
+     * @param web
+     * @throws Exception
+     */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**", "/swagger-ui.html", "/webjars/**");
+    }
 
     /**
      * configure

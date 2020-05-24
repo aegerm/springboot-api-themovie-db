@@ -2,6 +2,8 @@ package br.com.api.movies.resources;
 
 import br.com.api.movies.entities.Credit;
 import br.com.api.movies.services.CreditService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,7 @@ public class CreditResource {
      *
      * @return
      */
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping
     public ResponseEntity<List<Credit>> findCredits() {
         List<Credit> credits = this.creditService.findAll();
@@ -37,6 +40,7 @@ public class CreditResource {
      * @param id
      * @return
      */
+    @ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
     @GetMapping(value = "/{id}")
     public ResponseEntity<Credit> findCreditById(@PathVariable Long id) {
         Credit credit = this.creditService.findById(id);
