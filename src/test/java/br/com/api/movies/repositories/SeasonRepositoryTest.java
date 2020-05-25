@@ -14,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = MoviesApplication.class)
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 @EnableJpaRepositories(basePackageClasses = SeasonRepository.class)
 public class SeasonRepositoryTest {
 

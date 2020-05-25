@@ -84,4 +84,24 @@ public class SeedingService {
         credit.setPerson(person);
         creditRepository.save(credit);
     }
+
+    /**
+     * seedTest
+     *
+     */
+    public void seedTest() {
+        User user = new User();
+        user.setName("User Admin");
+        user.setLogin("uadm");
+        user.setPassword(new BCryptPasswordEncoder().encode("admin"));
+        user.addProfile(Profile.ADMIN);
+        userRepository.save(user);
+
+        User user1 = new User();
+        user1.setName("User Explorer");
+        user1.setLogin("uexp");
+        user1.setPassword(new BCryptPasswordEncoder().encode("root"));
+        user1.addProfile(Profile.USER);
+        userRepository.save(user1);
+    }
 }
