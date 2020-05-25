@@ -11,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = MoviesApplication.class)
@@ -39,12 +37,9 @@ public class SeasonRepositoryTest {
 
         this.mediaRepository.save(media);
 
-        Date d1 = new Date();
-        d1.setTime(1342310400);
-
         Season season1 = new Season();
         season1.setId(1L);
-        season1.setAirDate(new SimpleDateFormat("yyyy-MM-dd").format(d1));
+        season1.setAirDate("15-07-2012");
         season1.setSeasonNumber(5);
         season1.setMedia(media);
 
@@ -64,12 +59,9 @@ public class SeasonRepositoryTest {
 
         this.mediaRepository.save(media);
 
-        Date d1 = new Date();
-        d1.setTime(1342310400);
-
         Season season1 = new Season();
         season1.setId(1L);
-        season1.setAirDate(new SimpleDateFormat("yyyy-MM-dd").format(d1));
+        season1.setAirDate("15-07-2012");
         season1.setSeasonNumber(5);
         season1.setMedia(media);
 

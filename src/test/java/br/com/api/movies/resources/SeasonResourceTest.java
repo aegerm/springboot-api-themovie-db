@@ -18,8 +18,10 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -72,11 +74,8 @@ public class SeasonResourceTest {
 
         BDDMockito.when(this.mediaRepository.findById(1396L)).thenReturn(Optional.of(media));
 
-        Date d1 = new Date();
-        d1.setTime(1342310400);
-
         Season season1 = new Season();
-        season1.setAirDate(new SimpleDateFormat("yyyy-MM-dd").format(d1));
+        season1.setAirDate("15-07-2012");
         season1.setSeasonNumber(5);
         season1.setMedia(media);
 
@@ -105,12 +104,9 @@ public class SeasonResourceTest {
 
         BDDMockito.when(this.mediaRepository.findById(1396L)).thenReturn(Optional.of(media));
 
-        Date d1 = new Date();
-        d1.setTime(1342310400);
-
         Season season1 = new Season();
         season1.setId(1L);
-        season1.setAirDate(new SimpleDateFormat("yyyy-MM-dd").format(d1));
+        season1.setAirDate("15-07-2012");
         season1.setSeasonNumber(5);
         season1.setMedia(media);
 
