@@ -1,5 +1,7 @@
 ## Iniciando
 - Desenvolvido com Java 14
+- Alterar o arquivo application.yml, mudar o ambiente de test para dev. 
+- Usar test somente quando executar os testes unitários e de integração.
 - Executar o comando **gradle bootRun** para iniciar a aplicação (Ambiente Windows)
 - Usuários com perfíl Admin podem realizar operações POST
 - 96% classes, 72% lines covered
