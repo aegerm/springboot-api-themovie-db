@@ -1,5 +1,5 @@
 ## Iniciando
-- Java 14
+- Desenvolvido com Java 14
 - Executar o comando **gradle bootRun** para iniciar a aplicação (Ambiente Windows)
 - Usuários com perfíl Admin podem realizar operações POST
 - 96% classes, 72% lines covered
